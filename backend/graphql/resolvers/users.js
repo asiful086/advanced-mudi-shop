@@ -1,7 +1,6 @@
-
+const User = require("../../models/userModel");
 
 module.exports = {
-
   Query: {
     async getUsers() {
       try {
@@ -10,6 +9,22 @@ module.exports = {
       } catch (err) {
         throw new Error(err);
       }
+    },
+  },
+  Mutation: {
+    async register(
+      _,
+      { registerInput: { name, email, password, confirmPassword } }
+    ) {
+      console.log(name, email, password);
+
+      const newUser = new User({
+        email,
+        name,
+        password,
+      });
+      const res = await newUser.save();
+      return res._doc;
     },
   },
 };
