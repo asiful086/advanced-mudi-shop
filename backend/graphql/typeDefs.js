@@ -6,9 +6,10 @@ module.exports = gql`
     id: ID!
     email: String!
     role: String!
-    #token: String!
+    token: String!
     name: String!
-    #createdAt: String!
+    createdAt: String!
+    updatedAt: String!
   }
   # input type jodi error asee ai comment er jonno asbe
 
@@ -18,6 +19,10 @@ module.exports = gql`
     password: String!
     confirmPassword: String!
   }
+  input LoginInput {
+    email: String!
+    password: String!
+  }
 
   type Query {
     getUsers: [User!]!
@@ -25,6 +30,7 @@ module.exports = gql`
 
   type Mutation {
     register(registerInput: RegisterInput): User!
+    login(loginInput: LoginInput): User!
   }
 `;
 

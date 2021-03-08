@@ -23,9 +23,11 @@
   "homepage": "https://github.com/asiful086/advanced-mudi-shop#readme",
   "dependencies": {
     "apollo-server-express": "^2.21.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "graphql": "^15.5.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.15"
   },
   "devDependencies": {
