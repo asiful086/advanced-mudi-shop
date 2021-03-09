@@ -1,10 +1,13 @@
-const usersResolvers = require("./users");
+const categoryResolver = require("./categoryResolver");
+const userResolver = require("./userResolver");
 
 module.exports = {
   Query: {
-    ...usersResolvers.Query,
+    ...userResolver.Query,
+    ...categoryResolver.Query,
   },
   Mutation: {
-    ...usersResolvers.Mutation,
+    ...userResolver.Mutation,
+    ...categoryResolver.Mutation,
   },
 };

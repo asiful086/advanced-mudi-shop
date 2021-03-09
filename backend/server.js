@@ -6,12 +6,14 @@ const connectDB = require("./config/db");
 dotenv.config();
 connectDB();
 
-const typeDefs = require("./graphql/typeDefs");
+// const typeDefs = require("./graphql/typeDefs");
+const typeDefs = require("./graphql/schemas");
 const resolvers = require("./graphql/resolvers");
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => ({ req }),
 });
 
 // ======================== MIDDLEWARE  ===============

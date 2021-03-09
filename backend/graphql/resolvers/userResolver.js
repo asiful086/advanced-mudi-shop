@@ -5,16 +5,16 @@ const User = require("../../models/userModel");
 const {
   validateRegisterInput,
   validateLoginInput,
-} = require("../../validors/userValidators");
+} = require("../../validors/userValidator");
 
 // generate token for jwt
 function generateToken(user) {
-  // console.log(user);
   return jwt.sign(
     {
       id: user.id,
       email: user.email,
       name: user.name,
+      role: user.role
     },
     process.env.JWT_SECRET,
     { expiresIn: "1h" }
