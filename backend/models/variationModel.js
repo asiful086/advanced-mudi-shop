@@ -2,25 +2,22 @@ const autopopulate = require("mongoose-autopopulate");
 
 const mongoose = require("mongoose");
 
-const categorySchema = mongoose.Schema(
+const variationSchema = mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
       unique: true,
     },
-    photo: {
-      type: String,
-      // required: true,
-    },
+
     active: {
       type: Boolean,
       default: true,
     },
-    subcategories: [
+    variationvalues: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Subcategory",
+        ref: "Variationvalue",
         autopopulate: true,
       },
     ],
@@ -30,6 +27,6 @@ const categorySchema = mongoose.Schema(
   }
 );
 
-categorySchema.plugin(autopopulate);
+variationSchema.plugin(autopopulate);
 
-module.exports = mongoose.model("Category", categorySchema);
+module.exports = mongoose.model("Variation", variationSchema);

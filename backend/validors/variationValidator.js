@@ -1,5 +1,4 @@
-
-module.exports.validateCategoryInput = (name, photo) => {
+module.exports.validateVariationInput = (name) => {
   const errors = {};
   if (name.trim() === "") {
     errors.name = "name must not be empty";

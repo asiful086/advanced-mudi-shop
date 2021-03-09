@@ -6,7 +6,12 @@ type Variationvalue {
     createdAt: String!
     updatedAt: String!
   }
-  input VariationvalueInput {
+  input VariationvalueCreateInput {
+    name: String!
+    variation: ID!
+  }
+  input VariationvalueUpdateInput {
+    id: ID!
     name: String!
     variation: ID!
   }

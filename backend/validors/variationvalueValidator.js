@@ -1,12 +1,12 @@
-
-module.exports.validateCategoryInput = (name, photo) => {
+module.exports.validateVariationvalueInput = (name, variation) => {
   const errors = {};
   if (name.trim() === "") {
     errors.name = "name must not be empty";
   }
-  // if (photo.length > 1) {
-  //   errors.photo = "photo must be provided";
-  // }
+
+  if (variation.trim() === "") {
+    errors.variation = "variation must not be empty";
+  }
 
   return {
     errors,

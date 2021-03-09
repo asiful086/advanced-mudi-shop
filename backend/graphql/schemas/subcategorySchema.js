@@ -8,9 +8,15 @@ type Subcategory {
     createdAt: String!
     updatedAt: String!
   }
-  input SubcategoryInput {
+  input SubcategoryCreateInput {
     name: String!
-    photo: Upload!
+    #photo: Upload!
+    category: ID!
+  }
+  input SubcategoryUpdateInput {
+    id: ID!
+    name: String!
+    #photo: Upload!
     category: ID!
   }
 `;

@@ -77,6 +77,7 @@ module.exports = {
         throw new Error("Category not found");
       }
     },
+    // ============================  Delete  =============>
     async deleteCategory(_, { id }, context) {
       // 1. check auth
       const user = isAdmin(context);

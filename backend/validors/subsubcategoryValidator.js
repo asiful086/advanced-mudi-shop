@@ -1,5 +1,4 @@
-
-module.exports.validateCategoryInput = (name, photo) => {
+module.exports.validateSubsubcategoryInput = (name, photo, subcategory) => {
   const errors = {};
   if (name.trim() === "") {
     errors.name = "name must not be empty";
@@ -7,6 +6,9 @@ module.exports.validateCategoryInput = (name, photo) => {
   // if (photo.length > 1) {
   //   errors.photo = "photo must be provided";
   // }
+  if (subcategory.trim() === "") {
+    errors.category = "category must not be empty";
+  }
 
   return {
     errors,

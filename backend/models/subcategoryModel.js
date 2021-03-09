@@ -10,7 +10,11 @@ const subcategorySchema = mongoose.Schema(
     },
     photo: {
       type: String,
-      required: true,
+      // required: true,
+    },
+    active: {
+      type: Boolean,
+      default: true,
     },
     subsubcategories: [
       {
