@@ -29,8 +29,8 @@ module.exports = gql`
     register(registerInput: RegisterInput): User!
     login(loginInput: LoginInput): User!
     #category
-    createCategory(categoryInput: CategoryInput): Category!
-    updateCategory(categoryInput: CategoryInput): Category!
+    createCategory(input: CategoryCreateInput): Category!
+    updateCategory(input: CategoryUpdateInput): Category!
     deleteCategory(id: ID!): Category!
   }
 `;

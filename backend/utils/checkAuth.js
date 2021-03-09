@@ -23,7 +23,6 @@ const checkAuth = (context) => {
 
 module.exports.isAdmin = (context) => {
   const user = checkAuth(context);
-  console.log(user);
   if (user.role === "admin") {
     return user;
   }

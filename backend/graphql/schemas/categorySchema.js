@@ -7,7 +7,12 @@ type Category {
     createdAt: String!
     updatedAt: String!
   }
-  input CategoryInput {
+  input CategoryCreateInput {
+    name: String!
+    #photo: Upload!
+  }
+  input CategoryUpdateInput {
+    id: ID!
     name: String!
     #photo: Upload!
   }
