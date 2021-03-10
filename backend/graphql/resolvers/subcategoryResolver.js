@@ -81,13 +81,27 @@ module.exports = {
 
       // 3. make sure subcategory doesnot exists
       const subcategory = await Subcategory.findById(id);
+      // 4. find parent category and delete that subcategory from that category
+      let findCat = await Category.findById({ _id: subcategory.category.id });
+
+      const filteredSubcategories = findCat.subcategories.filter(
+        (subcategory) => subcategory.id != id
+      );
+
+      findCat.subcategories = filteredSubcategories;
+      await findCat.save();
+
       if (subcategory) {
         subcategory.name = name;
         subcategory.photo = photo;
         subcategory.category = category;
         const updatedSubcategory = await subcategory.save();
 
-        // 4. if the input subcategory's doesnot match with database category then  find the category then delete the subcategory push subcategory into this category
+        // 5. find the category and push subcategory into this category
+        const updatedCategory = await Category.findOne({ _id: category });
+        updatedCategory.subcategories.push(updatedSubcategory);
+        await updatedCategory.save();
+        // 6. finally return it
         return updatedSubcategory;
       } else {
         throw new Error("Subcategory not found");

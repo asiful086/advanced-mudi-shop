@@ -3,7 +3,7 @@ type Subcategory {
     id: ID!
     name: String!
     photo: String!
-    category: Category!
+    category: Category
     subsubcategories: [Subsubcategory!]!
     createdAt: String!
     updatedAt: String!

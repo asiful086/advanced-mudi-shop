@@ -37,3 +37,20 @@ const subcategorySchema = mongoose.Schema(
 subcategorySchema.plugin(autopopulate);
 
 module.exports = mongoose.model("Subcategory", subcategorySchema);
+
+subcategorySchema.pre("save", function (next) {
+  console.log("hellolaksdjfl;asjdf lsakdjf lasdkfj aslkdfj asldfj salk");
+  console.log(this);
+
+  // const modifiedField = this.getUpdate().$set.field;
+  // if (!modifiedField) {
+  //     return next();
+  // }
+  // try {
+  //     const newFiedValue = // do whatever...
+  //     this.getUpdate().$set.field = newFieldValue;
+  //     next();
+  // } catch (error) {
+  //     return next(error);
+  // }
+});
