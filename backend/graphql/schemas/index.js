@@ -45,6 +45,8 @@ module.exports = gql`
     # 1. user
     register(registerInput: RegisterInput): User!
     login(loginInput: LoginInput): User!
+    forgotPassword(email: String!): String!
+    resetPassword(input: ResetPasswordInput): User!
 
     # 2. category
     createCategory(input: CategoryCreateInput): Category!

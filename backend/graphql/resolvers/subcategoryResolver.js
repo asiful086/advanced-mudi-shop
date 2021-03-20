@@ -79,9 +79,10 @@ module.exports = {
         throw new UserInputError("Errors", { errors });
       }
 
-      // 3. make sure subcategory doesnot exists
+      // 3. make sure subcategory  exists
       const subcategory = await Subcategory.findById(id);
-      // 4. find parent category and delete that subcategory from that category
+
+      // 4. find parent  and delete that child from that parent
       let findCat = await Category.findById({ _id: subcategory.category.id });
 
       const filteredSubcategories = findCat.subcategories.filter(
@@ -91,17 +92,19 @@ module.exports = {
       findCat.subcategories = filteredSubcategories;
       await findCat.save();
 
+      // 5. update the subcategory
       if (subcategory) {
         subcategory.name = name;
         subcategory.photo = photo;
         subcategory.category = category;
         const updatedSubcategory = await subcategory.save();
 
-        // 5. find the category and push subcategory into this category
+        // 6. find the category and push subcategory into this category
         const updatedCategory = await Category.findOne({ _id: category });
         updatedCategory.subcategories.push(updatedSubcategory);
         await updatedCategory.save();
-        // 6. finally return it
+
+        // 7. finally return it
         return updatedSubcategory;
       } else {
         throw new Error("Subcategory not found");

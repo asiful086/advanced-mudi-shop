@@ -8,14 +8,25 @@ const subsubcategorySchema = mongoose.Schema(
       type: String,
       required: true,
     },
+
     photo: {
       type: String,
       // required: true,
     },
+
     active: {
       type: Boolean,
       default: true,
     },
+
+    products: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+        autopopulate: true,
+      },
+    ],
+
     subcategory: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Subcategory",

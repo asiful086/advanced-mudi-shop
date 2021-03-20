@@ -2,17 +2,25 @@ const { UserInputError } = require("apollo-server-express");
 const Category = require("../../models/categoryModel");
 const { validateCategoryInput } = require("../../validors/categoryValidator");
 const { isAdmin } = require("../../utils/checkAuth");
+const {
+  singleImageUpload,
+  singleImageDelete,
+  singleImageExist,
+} = require("../../utils/imageUpload");
+
 module.exports = {
   Query: {
     async getCategories() {
+      // console.log("hello from categories");
       try {
-        const categories = await Category.find();
+        const categories = await Category.find().sort({ createdAt: -1 });
         return categories;
       } catch (err) {
         throw new Error(err);
       }
     },
     async getCategory(_, { id }) {
+      console.log("hello from single category");
       try {
         const category = await Category.findById(id);
         return category;
@@ -24,7 +32,7 @@ module.exports = {
   Mutation: {
     // ============================  Create  =============>
 
-    async createCategory(_, { input: { name, photo } }, context) {
+    async createCategory(_, { input: { photo, name } }, context) {
       // 1. check auth
       const user = isAdmin(context);
 
@@ -46,9 +54,13 @@ module.exports = {
         });
       }
 
-      // 4. create a new category
+      // 4. create a new category and upload image
+      if (photo) {
+        photo = await singleImageUpload("category", photo);
+      }
       const newCategory = new Category({
         name,
+        photo,
       });
       const data = await newCategory.save();
       // 5. finaly return it
@@ -68,6 +80,21 @@ module.exports = {
 
       // 3. make sure category doesnot exists
       const category = await Category.findById(id);
+
+      // 4. process the image
+      if (photo) {
+        if (category.photo) {
+          console.log("inside", category.photo);
+
+          if (singleImageExist("category", category.photo)) {
+            singleImageDelete("category", category.photo);
+          }
+        }
+        photo = await singleImageUpload("category", photo);
+      } else {
+        photo = category.photo;
+      }
+
       if (category) {
         category.name = name;
         category.photo = photo;
@@ -85,6 +112,7 @@ module.exports = {
       try {
         // 2. make sure category doesnot exists
         const category = await Category.findById(id);
+
         if (category) {
           const deletedCategory = await category.delete();
           return deletedCategory;
@@ -97,3 +125,22 @@ module.exports = {
     },
   },
 };
+
+// const category = Category.findOneAndUpdate(
+//   { _id: id },
+//   {
+//     name,
+//     photo,
+//   },
+//   null,
+//   function (err, docs) {
+//     if (err) {
+//       throw new Error("Category not found");
+//     } else {
+//       console.log("Original Doc : ", docs);
+//       return docs;
+//     }
+//   }
+// );
+
+// return category;

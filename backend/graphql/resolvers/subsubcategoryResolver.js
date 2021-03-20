@@ -66,7 +66,7 @@ module.exports = {
       });
       const data = await newSubsubcategory.save();
 
-      // 5. find the category and push subcategory into this category
+      // 5. find the subcategory and push subsubcategory into this subcategory
       const updatedSubcategory = await Subcategory.findOne({
         _id: subcategory,
       });
@@ -96,15 +96,36 @@ module.exports = {
         throw new UserInputError("Errors", { errors });
       }
 
-      // 3. make sure subcategory doesnot exists
+      // 3. make sure subcategory  exists
       const subsubcategory = await Subsubcategory.findById(id);
+
+      // 4. find parent  and delete that child from that parent
+      let parentModel = await Subcategory.findById({
+        _id: subsubcategory.variation.id,
+      });
+
+      const filteredChildrens = parentModel.subsubcategories.filter(
+        (subsubcategory) => subsubcategory.id != id
+      );
+
+      parentModel.subsubcategories = filteredChildrens;
+      await parentModel.save();
+
+      // 5. update the subsubcategory
       if (subsubcategory) {
         subsubcategory.name = name;
         subsubcategory.photo = photo;
         subsubcategory.subcategory = subcategory;
-        const updatedSubcategory = await subsubcategory.save();
+        const updatedSubsubcategory = await subsubcategory.save();
+        // 6. find the subcategory and push subsubcategory into this subcategory
+        const updatedSubcategory = await Subcategory.findOne({
+          _id: subcategory,
+        });
+        updatedSubcategory.subsubcategories.push(updatedSubsubcategory);
+        await updatedSubcategory.save();
 
-        return updatedSubcategory;
+        // 7. finally return it
+        return updatedSubsubcategory;
       } else {
         throw new Error("Subsubcategory not found");
       }

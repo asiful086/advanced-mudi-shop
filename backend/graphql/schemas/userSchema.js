@@ -19,4 +19,9 @@ module.exports.userSchema = `
     email: String!
     password: String!
   }
+  input ResetPasswordInput {
+    resetToken: String!
+    password: String!
+    confirmPassword: String!
+  }
 `;

@@ -1,5 +1,7 @@
 const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
+const path = require("path");
+
 const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
@@ -16,13 +18,16 @@ const server = new ApolloServer({
   context: ({ req }) => ({ req }),
 });
 
+
+
 // ======================== MIDDLEWARE  ===============
 
 const app = express();
 server.applyMiddleware({ app });
 
-//   app.use(express.static("public"));
-
+// app.use(express.static("../public"));
+// console.log(path.join(__dirname, `../public/`))
+app.use(express.static(path.join(__dirname, `../public/`)));
 app.use(cors());
 
 app.get("/", (req, res) => {
