@@ -6,9 +6,9 @@ module.exports.validateSubcategoryInput = (name, photo, category) => {
   // if (photo.length > 1) {
   //   errors.photo = "photo must be provided";
   // }
-  if (category.trim() === "") {
-    errors.category = "category must not be empty";
-  }
+  // if (category.trim() === "") {
+  //   errors.category = "category must not be empty";
+  // }
 
   return {
     errors,

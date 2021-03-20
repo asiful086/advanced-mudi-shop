@@ -1,6 +1,7 @@
 const autopopulate = require("mongoose-autopopulate");
 
 const mongoose = require("mongoose");
+const { singleImageExist, singleImageDelete } = require("../utils/imageUpload");
 
 const subcategorySchema = mongoose.Schema(
   {
@@ -36,21 +37,17 @@ const subcategorySchema = mongoose.Schema(
 
 subcategorySchema.plugin(autopopulate);
 
-module.exports = mongoose.model("Subcategory", subcategorySchema);
+// Delete images
+subcategorySchema.pre("remove", async function (next) {
+  console.log("pre");
+  if (this.photo) {
+    console.log("inside");
+    if (singleImageExist("subcategory", this.photo)) {
+      singleImageDelete("subcategory", this.photo);
+    }
+  }
 
-subcategorySchema.pre("save", function (next) {
-  console.log("hellolaksdjfl;asjdf lsakdjf lasdkfj aslkdfj asldfj salk");
-  console.log(this);
-
-  // const modifiedField = this.getUpdate().$set.field;
-  // if (!modifiedField) {
-  //     return next();
-  // }
-  // try {
-  //     const newFiedValue = // do whatever...
-  //     this.getUpdate().$set.field = newFieldValue;
-  //     next();
-  // } catch (error) {
-  //     return next(error);
-  // }
+  next();
 });
+
+module.exports = mongoose.model("Subcategory", subcategorySchema);

@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-// ============================= GET CATEGORIES MUTATION =================>
+// ============================= GET CATEGORIES QUERY =================>
 
 export const GET_CATEGORIES = gql`
   {
@@ -12,7 +12,7 @@ export const GET_CATEGORIES = gql`
     }
   }
 `;
-// ============================= GET CATEGORY MUTATION =================>
+// ============================= GET CATEGORY QUERY =================>
 
 export const GET_CATEGORY = gql`
   query getCategory($id: ID!) {

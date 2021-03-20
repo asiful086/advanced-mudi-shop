@@ -37,22 +37,6 @@ const categorySchema = mongoose.Schema(
 
 categorySchema.plugin(autopopulate);
 
-// categorySchema.pre("save", async function (next) {
-//   if (!this.isModified("photo")) {
-//     console.log("photo is not updated");
-//     next();
-//   }
-//   fs.access(__dirname, `../../public/images/category/${this.photo}`, (err) => {
-//     if (err) {
-//       console.log("File does not exist.");
-//     } else {
-//       console.log("File exists.");
-//     }
-//   });
-
-//   next();
-// });
-
 // Delete images
 categorySchema.pre("remove", async function (next) {
   if (this.photo) {

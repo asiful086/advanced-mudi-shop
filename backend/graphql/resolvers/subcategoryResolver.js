@@ -3,6 +3,11 @@ const Category = require("../../models/categoryModel");
 const Subcategory = require("../../models/subcategoryModel");
 const { isAdmin } = require("../../utils/checkAuth");
 const {
+  singleImageExist,
+  singleImageDelete,
+  singleImageUpload,
+} = require("../../utils/imageUpload");
+const {
   validateSubcategoryInput,
 } = require("../../validors/subcategoryValidator");
 
@@ -10,7 +15,7 @@ module.exports = {
   Query: {
     async getSubcategories() {
       try {
-        const subcategories = await Subcategory.find();
+        const subcategories = await Subcategory.find().sort({ createdAt: -1 });
         return subcategories;
       } catch (err) {
         throw new Error(err);
@@ -50,16 +55,22 @@ module.exports = {
         });
       }
 
-      // 4. create a new subcategory
+      // 4. create a new subcategory and upload image
+      if (photo) {
+        photo = await singleImageUpload("subcategory", photo);
+      }
       const newSubcategory = new Subcategory({
         name,
         category,
+        photo,
       });
       const data = await newSubcategory.save();
       // 5. find the category and push subcategory into this category
-      const updatedCategory = await Category.findOne({ _id: category });
-      updatedCategory.subcategories.push(data);
-      await updatedCategory.save();
+      if (category) {
+        const updatedCategory = await Category.findOne({ _id: category });
+        updatedCategory.subcategories.push(data);
+        await updatedCategory.save();
+      }
       // 6. finaly return subcategory
       return data;
     },
@@ -70,6 +81,7 @@ module.exports = {
       { input: { id, name, photo, category } },
       context
     ) {
+      // console.log("hello from subcategory update", id, name, photo, category);
       // 1. check auth
       const user = isAdmin(context);
 
@@ -82,29 +94,46 @@ module.exports = {
       // 3. make sure subcategory  exists
       const subcategory = await Subcategory.findById(id);
 
-      // 4. find parent  and delete that child from that parent
-      let findCat = await Category.findById({ _id: subcategory.category.id });
+      if (subcategory.category) {
+        // 4. find parent  and delete that child from that parent
+        let findCat = await Category.findById({ _id: subcategory.category.id });
 
-      const filteredSubcategories = findCat.subcategories.filter(
-        (subcategory) => subcategory.id != id
-      );
+        const filteredSubcategories = findCat.subcategories.filter(
+          (subcategory) => subcategory.id != id
+        );
 
-      findCat.subcategories = filteredSubcategories;
-      await findCat.save();
+        findCat.subcategories = filteredSubcategories;
+        await findCat.save();
+      }
 
-      // 5. update the subcategory
+      // 5. process the image
+      if (photo) {
+        if (subcategory.photo) {
+          if (singleImageExist("subcategory", subcategory.photo)) {
+            singleImageDelete("subcategory", subcategory.photo);
+          }
+        }
+        photo = await singleImageUpload("subcategory", photo);
+      } else {
+        photo = subcategory.photo;
+      }
+
+      // 6. update the subcategory
       if (subcategory) {
         subcategory.name = name;
         subcategory.photo = photo;
         subcategory.category = category;
         const updatedSubcategory = await subcategory.save();
 
-        // 6. find the category and push subcategory into this category
-        const updatedCategory = await Category.findOne({ _id: category });
-        updatedCategory.subcategories.push(updatedSubcategory);
-        await updatedCategory.save();
+        // 7. find the category and push subcategory into this category
+        if (category) {
+          console.log(category);
+          const updatedCategory = await Category.findOne({ _id: category });
+          updatedCategory.subcategories.push(updatedSubcategory);
+          await updatedCategory.save();
+        }
 
-        // 7. finally return it
+        // 8. finally return it
         return updatedSubcategory;
       } else {
         throw new Error("Subcategory not found");
@@ -112,6 +141,7 @@ module.exports = {
     },
     // ============================  Delete  =============>
     async deleteSubcategory(_, { id }, context) {
+      console.log("hello from deletesubcategory", id);
       // 1. check auth
       const user = isAdmin(context);
 

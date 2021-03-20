@@ -20,7 +20,6 @@ module.exports = {
       }
     },
     async getCategory(_, { id }) {
-      console.log("hello from single category");
       try {
         const category = await Category.findById(id);
         return category;
@@ -78,14 +77,12 @@ module.exports = {
         throw new UserInputError("Errors", { errors });
       }
 
-      // 3. make sure category doesnot exists
+      // 3. make sure category  exists
       const category = await Category.findById(id);
 
       // 4. process the image
       if (photo) {
         if (category.photo) {
-          console.log("inside", category.photo);
-
           if (singleImageExist("category", category.photo)) {
             singleImageDelete("category", category.photo);
           }

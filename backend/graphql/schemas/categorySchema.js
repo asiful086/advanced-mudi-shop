@@ -3,7 +3,7 @@ type Category {
     id: ID!
     name: String!
     photo: String
-    subcategories: [Subcategory!]!
+    subcategories: [Subcategory!]
     createdAt: String!
     updatedAt: String!
   }

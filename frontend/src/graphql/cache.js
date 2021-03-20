@@ -10,6 +10,11 @@ export default new InMemoryCache({
             return incoming;
           },
         },
+        getSubcategories: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
         // getCategory: {
         //   read(_, { readField, variables }) {
         //     const allCategories = readField("getCategories");
@@ -25,6 +30,18 @@ export default new InMemoryCache({
         getCategory(_, { args, toReference }) {
           return toReference({
             __typename: "Category",
+            id: args.id,
+          });
+        },
+        getSubcategory(_, { args, toReference }) {
+          return toReference({
+            __typename: "Subcategory",
+            id: args.id,
+          });
+        },
+        getSubsubcategory(_, { args, toReference }) {
+          return toReference({
+            __typename: "Subsubcategory",
             id: args.id,
           });
         },

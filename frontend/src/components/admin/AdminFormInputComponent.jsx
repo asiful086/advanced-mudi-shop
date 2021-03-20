@@ -12,7 +12,7 @@ const AdminFormInputComponent = ({
 }) => {
   return (
     <div>
-      <div className="w-4/5m m-auto ">
+      <div className="my-3">
         <label htmlFor={label.replace(/ /g, "")} className="py-2 block">
           {label}
         </label>

@@ -9,6 +9,9 @@ import AdminResetPasswordPage from "./pages/admin/AdminResetPasswordPage";
 import AdminCategoryListPage from "./pages/admin/category/AdminCategoryListPage";
 import AdminCategoryCreatePage from "./pages/admin/category/AdminCategoryCreatePage";
 import AdminCategoryEditPage from "./pages/admin/category/AdminCategoryEditPage";
+import AdminSubcategoryCreatePage from "./pages/admin/subcategory/AdminSubcategoryCreatePage";
+import AdminSubcategoryListPage from "./pages/admin/subcategory/AdminSubcategoryListPage";
+import AdminSubcategoryEditPage from "./pages/admin/subcategory/AdminSubcategoryEditPage";
 
 function App() {
   return (
@@ -42,6 +45,19 @@ function App() {
         <AdminLayoutRoute
           path="/admin/category/edit/:id"
           component={AdminCategoryEditPage}
+        />
+        {/* subcategory route */}
+        <AdminLayoutRoute
+          path="/admin/subcategory/list"
+          component={AdminSubcategoryListPage}
+        />
+        <AdminLayoutRoute
+          path="/admin/subcategory/add"
+          component={AdminSubcategoryCreatePage}
+        />
+        <AdminLayoutRoute
+          path="/admin/subcategory/edit/:id"
+          component={AdminSubcategoryEditPage}
         />
       </Switch>
     </div>

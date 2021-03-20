@@ -3,7 +3,7 @@ import "./LoaderStyle.css";
 
 const LoaderComponent = () => {
   return (
-    <div className="h-screen w-screen flex items-center justify-center">
+    <div className="h-screen w-full flex items-center justify-center">
       <div className="loader"></div>
     </div>
   );

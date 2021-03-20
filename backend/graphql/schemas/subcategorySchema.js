@@ -2,7 +2,7 @@ module.exports.subcategorySchema = `
 type Subcategory {
     id: ID!
     name: String!
-    photo: String!
+    photo: String
     category: Category
     subsubcategories: [Subsubcategory!]!
     createdAt: String!
@@ -10,13 +10,13 @@ type Subcategory {
   }
   input SubcategoryCreateInput {
     name: String!
-    #photo: Upload!
-    category: ID!
+    photo: Upload
+    category: ID
   }
   input SubcategoryUpdateInput {
     id: ID!
     name: String!
-    #photo: Upload!
-    category: ID!
+    photo: Upload
+    category: ID
   }
 `;
