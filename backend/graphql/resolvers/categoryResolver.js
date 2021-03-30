@@ -14,6 +14,7 @@ module.exports = {
       // console.log("hello from categories");
       try {
         const categories = await Category.find().sort({ createdAt: -1 });
+
         return categories;
       } catch (err) {
         throw new Error(err);

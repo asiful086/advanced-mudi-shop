@@ -28,3 +28,13 @@ module.exports.isAdmin = (context) => {
   }
   throw new AuthenticationError("You are not authorized");
 };
+
+// isBuyer
+
+module.exports.isBuyer = (context) => {
+  const user = checkAuth(context);
+  if (user.role === "buyer") {
+    return user;
+  }
+  throw new AuthenticationError("You are not authorized");
+};

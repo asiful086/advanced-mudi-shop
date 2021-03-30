@@ -15,13 +15,13 @@ const variationvalueSchema = mongoose.Schema(
       default: true,
     },
 
-    products: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-        autopopulate: true,
-      },
-    ],
+    // products: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Product",
+    //     autopopulate: true,
+    //   },
+    // ],
 
     variation: {
       type: mongoose.Schema.Types.ObjectId,

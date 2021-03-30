@@ -13,7 +13,10 @@ const AdminFormInputComponent = ({
   return (
     <div>
       <div className="my-3">
-        <label htmlFor={label.replace(/ /g, "")} className="py-2 block">
+        <label
+          htmlFor={label.replace(/ /g, "")}
+          className="py-2 block capitalize"
+        >
           {label}
         </label>
         <div className="mb-3s pt-0">

@@ -2,7 +2,7 @@ module.exports.variationSchema = `
 type Variation {
     id: ID!
     name: String!
-    variationvalues: [Variationvalue!]!
+    variationvalues: [Variationvalue]
     createdAt: String!
     updatedAt: String!
   }

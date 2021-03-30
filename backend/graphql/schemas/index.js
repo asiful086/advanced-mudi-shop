@@ -7,6 +7,7 @@ const { subsubcategorySchema } = require("./subsubcategorySchema");
 const { variationSchema } = require("./variationSchema");
 const { variationvalueSchema } = require("./variationvalueSchema");
 const { productSchema } = require("./productSchema");
+const { orderSchema } = require("./orderSchema");
 
 module.exports = gql`
   ${userSchema}
@@ -16,6 +17,7 @@ module.exports = gql`
   ${variationSchema}
   ${variationvalueSchema}
   ${productSchema}
+  ${orderSchema}
   type Query {
     # 1. user
     getUsers: [User!]!
@@ -39,6 +41,14 @@ module.exports = gql`
     # 5. variationvalue
     getVariationvalues: [Variationvalue!]!
     getVariationvalue(id: ID!): Variationvalue!
+
+    # 6. product
+    getProducts: [Product!]!
+    getProduct(id: ID!): Product!
+
+    # 7. order
+    getOrders: [Order!]!
+    getOrder(id: ID!): Order!
   }
 
   type Mutation {
@@ -69,9 +79,19 @@ module.exports = gql`
     deleteVariation(id: ID!): Variation!
 
     # 5. variationvalue
-    createVariationvalue(input: VariationvalueCreateInput): Variationvalue!
+    createVariationvalue(input: VariationvalueCreateInput): [Variationvalue!]!
     updateVariationvalue(input: VariationvalueUpdateInput): Variationvalue!
     deleteVariationvalue(id: ID!): Variationvalue!
+
+    # 6. product
+    createProduct(input: ProductCreateInput): Product!
+    updateProduct(input: ProductUpdateInput): Product!
+    deleteProduct(id: ID!): Product!
+
+    # 7. order
+    createOrder(input: OrderCreateInput): Order!
+    updateOrder(input: OrderUpdateInput): Order!
+    deleteOrder(id: ID!): Order!
   }
 `;
 

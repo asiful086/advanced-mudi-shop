@@ -1,19 +1,18 @@
 .loader {
-    /* border: 10px dotted rgba(16, 185, 129, 1); */
-    border: 16px dotted #f3f3f3;
-    border-top: 10px dotted rgba(16, 185, 129, 1);
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: loader 2s linear infinite;
+  /* border: 10px dotted rgba(16, 185, 129, 1); */
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid rgba(16, 185, 129, 1);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: loader .5s linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  @keyframes loader {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
   }
-  
+}

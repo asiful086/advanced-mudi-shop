@@ -1,4 +1,6 @@
 const categoryResolver = require("./categoryResolver");
+const orderResolver = require("./orderResolver");
+const productResolver = require("./productResolver");
 const subcategoryResolver = require("./subcategoryResolver");
 const subsubcategoryResolver = require("./subsubcategoryResolver");
 const userResolver = require("./userResolver");
@@ -12,7 +14,9 @@ module.exports = {
     ...subcategoryResolver.Query,
     ...subsubcategoryResolver.Query,
     ...variationResolver.Query,
-    ...variationvalueResolver.Query
+    ...variationvalueResolver.Query,
+    ...productResolver.Query,
+    ...orderResolver.Query,
   },
   Mutation: {
     ...userResolver.Mutation,
@@ -20,6 +24,8 @@ module.exports = {
     ...subcategoryResolver.Mutation,
     ...subsubcategoryResolver.Mutation,
     ...variationResolver.Mutation,
-    ...variationvalueResolver.Mutation
+    ...variationvalueResolver.Mutation,
+    ...productResolver.Mutation,
+    ...orderResolver.Mutation,
   },
 };

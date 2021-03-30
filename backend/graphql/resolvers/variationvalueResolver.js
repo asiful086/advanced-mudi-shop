@@ -11,15 +11,19 @@ module.exports = {
   Query: {
     async getVariationvalues() {
       try {
-        const variationvalues = await Variationvalue.find();
+        const variationvalues = await Variationvalue.find().sort({
+          createdAt: -1,
+        });
         return variationvalues;
       } catch (err) {
         throw new Error(err);
       }
     },
     async getVariationvalue(_, { id }) {
+      console.log("single value", id);
       try {
         const variationvalue = await Variationvalue.findById(id);
+        console.log(variationvalue);
         return variationvalue;
       } catch (error) {
         throw new Error(error);
@@ -30,6 +34,7 @@ module.exports = {
     // ============================  Create  =============>
 
     async createVariationvalue(_, { input: { name, variation } }, context) {
+      console.log("from value", name, variation);
       // 1. check auth
       const user = isAdmin(context);
 
@@ -40,31 +45,58 @@ module.exports = {
         throw new UserInputError("Errors", { errors });
       }
 
-      // 3. make sure variationvalue doesnot exists
-      name = name.trim();
-      let variationvalue = await Variationvalue.findOne({ name });
-      if (variationvalue) {
-        throw new UserInputError("This variationvalue name exists", {
-          errors: {
-            name: "This name is taken",
-          },
+      let variationValues = [];
+
+      for (value of name) {
+        value = value.trim();
+        let variationvalue = await Variationvalue.findOne({ name: value });
+        if (variationvalue) {
+          throw new UserInputError(`${value}  exists already`, {
+            errors: {
+              name: "This name is taken",
+            },
+          });
+        }
+
+        const newVariationvalue = new Variationvalue({
+          name: value,
+          variation,
         });
+        const data = await newVariationvalue.save();
+        variationValues = [...variationValues, data];
+
+        // 5. find the variation and push variationvalue into this variation
+        const updatedVariation = await Variation.findOne({ _id: variation });
+        updatedVariation.variationvalues.push(data);
+        await updatedVariation.save();
       }
 
+      // 3. make sure variationvalue doesnot exists
+
+      // name = name.trim();
+      // let variationvalue = await Variationvalue.findOne({ name });
+      // if (variationvalue) {
+      //   throw new UserInputError("This variationvalue name exists", {
+      //     errors: {
+      //       name: "This name is taken",
+      //     },
+      //   });
+      // }
+
       // 4. create a new variationvalue
-      const newVariationvalue = new Variationvalue({
-        name,
-        variation,
-      });
-      const data = await newVariationvalue.save();
+      // const newVariationvalue = new Variationvalue({
+      //   name,
+      //   variation,
+      // });
+      // const data = await newVariationvalue.save();
 
       // 5. find the variation and push variationvalue into this variation
-      const updatedVariation = await Variation.findOne({ _id: variation });
-      updatedVariation.variationvalues.push(data);
-      await updatedVariation.save();
+      // const updatedVariation = await Variation.findOne({ _id: variation });
+      // updatedVariation.variationvalues.push(data);
+      // await updatedVariation.save();
 
       // 6. finaly return variationvalue
-      return data;
+      return variationValues;
     },
     // ============================  Update  =============>
 
@@ -82,16 +114,16 @@ module.exports = {
       const variationvalue = await Variationvalue.findById(id);
 
       // 4. find parent  and delete that child from that parent
-      let parentModel = await Variation.findById({
-        _id: variationvalue.variation.id,
-      });
+      // let parentModel = await Variation.findById({
+      //   _id: variationvalue.variation.id,
+      // });
 
-      const filteredChildrens = parentModel.variationvalues.filter(
-        (variationvalue) => variationvalue.id != id
-      );
+      // const filteredChildrens = parentModel.variationvalues.filter(
+      //   (variationvalue) => variationvalue.id != id
+      // );
 
-      parentModel.variationvalues = filteredChildrens;
-      await parentModel.save();
+      // parentModel.variationvalues = filteredChildrens;
+      // await parentModel.save();
 
       // 5. update the variation value
       if (variationvalue) {
@@ -100,9 +132,9 @@ module.exports = {
         const updatedVariationvalue = await variationvalue.save();
 
         // 6. find the variation and push variation value to this variation
-        const updatedVariation = await Variation.findOne({ _id: variation });
-        updatedVariation.variationvalues.push(updatedVariationvalue);
-        await updatedVariation.save();
+        // const updatedVariation = await Variation.findOne({ _id: variation });
+        // updatedVariation.variationvalues.push(updatedVariationvalue);
+        // await updatedVariation.save();
         // 7. finally return it
         return updatedVariationvalue;
       } else {

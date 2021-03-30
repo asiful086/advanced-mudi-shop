@@ -6,7 +6,7 @@ module.exports = {
   Query: {
     async getVariations() {
       try {
-        const variations = await Variation.find();
+        const variations = await Variation.find().sort({ createdAt: -1 });
         return variations;
       } catch (err) {
         throw new Error(err);
@@ -61,6 +61,7 @@ module.exports = {
     // ============================  Update  =============>
 
     async updateVariation(_, { input: { id, name } }, context) {
+      console.log("update", id, name);
       // 1. check auth
       const user = isAdmin(context);
 

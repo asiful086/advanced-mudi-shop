@@ -130,12 +130,6 @@ const AdminCategoryListPage = ({ history }) => {
                   <th className="text-gray-600 dark:text-gray-400 font-normal pr-6  text-sm tracking-normal leading-4 font-medium">
                     Image
                   </th>
-                  {/* <th className="text-gray-600 dark:text-gray-400 font-normal pr-6  text-sm tracking-normal leading-4">
-                  Description
-                </th>
-                <th className="text-gray-600 dark:text-gray-400 font-normal pr-6  text-sm tracking-normal leading-4">
-                  Price
-                </th>*/}
                   <th className="text-gray-600 dark:text-gray-400 font-normal pr-6  text-sm tracking-normal leading-4 font-medium">
                     Date
                   </th>

@@ -17,13 +17,13 @@ const subcategorySchema = mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    subsubcategories: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Subsubcategory",
-        autopopulate: true,
-      },
-    ],
+    // subsubcategories: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Subsubcategory",
+    //     autopopulate: true,
+    //   },
+    // ],
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",

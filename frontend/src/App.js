@@ -12,16 +12,49 @@ import AdminCategoryEditPage from "./pages/admin/category/AdminCategoryEditPage"
 import AdminSubcategoryCreatePage from "./pages/admin/subcategory/AdminSubcategoryCreatePage";
 import AdminSubcategoryListPage from "./pages/admin/subcategory/AdminSubcategoryListPage";
 import AdminSubcategoryEditPage from "./pages/admin/subcategory/AdminSubcategoryEditPage";
+import AdminSubsubcategoryListPage from "./pages/admin/subsubcategory/AdminSubsubcategoryListPage";
+import AdminSubsubcategoryCreatePage from "./pages/admin/subsubcategory/AdminSubsubcategoryCreatePage";
+import AdminSubsubcategoryEditPage from "./pages/admin/subsubcategory/AdminSubsubcategoryEditPage";
+import AdminVariationCreatePage from "./pages/admin/variation/AdminVariationCreatePage";
+import AdminVariationListPage from "./pages/admin/variation/AdminVariationListPage";
+import AdminVariationEditPage from "./pages/admin/variation/AdminVariationEditPage";
+import AdminVariationValueListPage from "./pages/admin/variationvalue/AdminVariationValueListPage";
+import AdminVariationValueCreatePage from "./pages/admin/variationvalue/AdminVariationValueCreatePage";
+import AdminVariationValueEditPage from "./pages/admin/variationvalue/AdminVariationValueEditPage";
+import AdminProductListPage from "./pages/admin/product/AdminProductListPage";
+import AdminProductCreatePage from "./pages/admin/product/AdminProductCreatePage";
+import AdminProductEditPage from "./pages/admin/product/AdminProductEditPage";
+import BuyerLayoutRoute from "./layouts/buyer/BuyerLayoutRoute";
+import BuyerHomePage from "./pages/buyer/BuyerHomePage";
+import BuyerLayoutProtectedRoute from "./layouts/buyer/BuyerLayoutProtectedRoute";
+import BuyerShippingPage from "./pages/buyer/BuyerShippingPage";
+import BuyerPaymentPage from "./pages/buyer/BuyerPaymentPage";
+import BuyerPlaceOrderPage from "./pages/buyer/BuyerPlaceOrderPage";
 
 function App() {
   return (
     <div>
       <Switch>
+        <BuyerLayoutRoute exact path="/" component={BuyerHomePage} />
+        <BuyerLayoutProtectedRoute
+          path="/shipping"
+          component={BuyerShippingPage}
+        />
+        <BuyerLayoutProtectedRoute
+          path="/payment"
+          component={BuyerPaymentPage}
+        />
+        <BuyerLayoutProtectedRoute
+          path="/placeorder"
+          component={BuyerPlaceOrderPage}
+        />
+
         {/* front */}
         {/* <FrontRoute exact path="/" component={Home} />
         <FrontRoute exact path="/product" component={FrontProduct} /> */}
         {/* <Proute exact path="/dashboard" component={AdminHome} /> */}
         {/* <Route path="/" component={AdminResetPasswordPage} /> */}
+        {/* <Route exact path="/" component={AdminLoginPage} /> */}
         <Route path="/admin/login" component={AdminLoginPage} />
         <Route
           path="/admin/forgotpassword"
@@ -58,6 +91,58 @@ function App() {
         <AdminLayoutRoute
           path="/admin/subcategory/edit/:id"
           component={AdminSubcategoryEditPage}
+        />
+        {/* subsubcategory route */}
+        <AdminLayoutRoute
+          path="/admin/subsubcategory/list"
+          component={AdminSubsubcategoryListPage}
+        />
+        <AdminLayoutRoute
+          path="/admin/subsubcategory/add"
+          component={AdminSubsubcategoryCreatePage}
+        />
+        <AdminLayoutRoute
+          path="/admin/subsubcategory/edit/:id"
+          component={AdminSubsubcategoryEditPage}
+        />
+        {/* variation route */}
+        {/* <AdminLayoutRoute
+          path="/admin/variation/list"
+          component={AdminVariationListPage}
+        />
+        <AdminLayoutRoute
+          path="/admin/variation/add"
+          component={AdminVariationCreatePage}
+        />
+        <AdminLayoutRoute
+          path="/admin/variation/edit/:id"
+          component={AdminVariationEditPage}
+        /> */}
+        {/* variationvalue route */}
+        {/* <AdminLayoutRoute
+          path="/admin/variationvalue/list"
+          component={AdminVariationValueListPage}
+        />
+        <AdminLayoutRoute
+          path="/admin/variationvalue/add"
+          component={AdminVariationValueCreatePage}
+        />
+        <AdminLayoutRoute
+          path="/admin/variationvalue/edit/:id"
+          component={AdminVariationValueEditPage}
+        /> */}
+        {/* product route */}
+        <AdminLayoutRoute
+          path="/admin/product/list"
+          component={AdminProductListPage}
+        />
+        <AdminLayoutRoute
+          path="/admin/product/add"
+          component={AdminProductCreatePage}
+        />
+        <AdminLayoutRoute
+          path="/admin/product/edit/:id"
+          component={AdminProductEditPage}
         />
       </Switch>
     </div>

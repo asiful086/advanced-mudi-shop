@@ -127,12 +127,10 @@ const AdminSubcategoryListPage = ({ history }) => {
                   <th className="text-gray-600 dark:text-gray-400 font-normal pr-6  text-sm tracking-normal leading-4 font-medium">
                     Image
                   </th>
-                  {/* <th className="text-gray-600 dark:text-gray-400 font-normal pr-6  text-sm tracking-normal leading-4">
-                  Description
-                </th>
-                <th className="text-gray-600 dark:text-gray-400 font-normal pr-6  text-sm tracking-normal leading-4">
-                  Price
-                </th>*/}
+                  <th className="text-gray-600 dark:text-gray-400 font-normal pr-6  text-sm tracking-normal leading-4 font-medium">
+                    Category
+                  </th>
+
                   <th className="text-gray-600 dark:text-gray-400 font-normal pr-6  text-sm tracking-normal leading-4 font-medium">
                     Date
                   </th>
@@ -149,21 +147,6 @@ const AdminSubcategoryListPage = ({ history }) => {
                       className="h-auto sm:h-24 border-gray-300 dark:border-gray-200 
                       border  sm:border-0 sm:border-b  align-middle text-center block sm:table-row my-10 sm:my-0"
                     >
-                      {/* style="vertical-align: middle;text-align: center;" */}
-                      {/* <td className="prr-6 whitespace-no-wrap align-middle text-center">
-                      <div className="flex items-center justify-center">
-                        <div className="h-8 w-8">
-                          <img
-                            src="https://tuk-cdn.s3.amazonaws.com/assets/components/advance_tables/at_1.png"
-                            alt="image"
-                            className="h-full w-full rounded-full overflow-hidden shadow"
-                          />
-                        </div>
-                        <p className="ml-2 text-gray-800 dark:text-gray-100 tracking-normal leading-4 text-sm">
-                          Carrie Anthony
-                        </p>
-                      </div>
-                    </td> */}
                       <td
                         className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4 block sm:table-cell text-right sm:text-center relative py-10 sm:py-0 border-b sm:border-b-0"
                         data-label="Name"
@@ -181,12 +164,12 @@ const AdminSubcategoryListPage = ({ history }) => {
                           className="w-16  overflow-hidden shadow block ml-auto"
                         />
                       </td>
-                      {/* <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-                  Lorem ipsum dolor sit amet.
-                </td>
-                <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-                  10 tk
-                </td>*/}
+                      <td
+                        className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4 block sm:table-cell text-right sm:text-center relative py-10 sm:py-0 border-b sm:border-b-0"
+                        data-label="Category"
+                      >
+                        {subcategory.category && subcategory.category.name}
+                      </td>
                       <td
                         className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4 block sm:table-cell
                       text-right sm:text-center relative    py-10 sm:py-0 border-b sm:border-b-0"
