@@ -1,4 +1,9 @@
 const { UserInputError } = require("apollo-server-express");
+const stripe = require("stripe")(
+  "sk_test_51Ial7RIVHzgcEShqPOvFBraW05eeH5KF3hmZ6eJZXBJY7jEyUehRcsYqbXXApMrdNTTeeS1kZpuwpZL6KgYBhqOD0087UaH1mq"
+);
+
+const { v4: uuidv4 } = require("uuid");
 const Category = require("../../models/categoryModel");
 const Order = require("../../models/orderModel");
 const Subcategory = require("../../models/subcategoryModel");
@@ -81,64 +86,78 @@ module.exports = {
     },
     // ============================  Update  =============>
 
-    async updateOrder(_, { input: { id, name, photo, category } }, context) {
-      // console.log("hello from subcategory update", id, name, photo, category);
+    async updateOrderToPaid(_, { input: { id, email, source } }, context) {
+      console.log("from update order to paid");
+      console.log("id", id);
+      console.log("email", email);
+      console.log("source", source);
+
       // 1. check auth
-      const user = isAdmin(context);
+      const user = isBuyer(context);
 
-      // 2. validate subcategory data
-      const { valid, errors } = validateSubcategoryInput(name, photo, category);
-      if (!valid) {
-        throw new UserInputError("Errors", { errors });
-      }
+      const order = await Order.findById(id);
 
-      // 3. make sure subcategory  exists
-      const subcategory = await Subcategory.findById(id);
+      const idempontencyKey = uuidv4();
+      // const idempontencyKey = "uuid()";
 
-      if (subcategory.category) {
-        // 4. find parent  and delete that child from that parent
-        let findCat = await Category.findById({ _id: subcategory.category.id });
+      try {
+        const customer = await stripe.customers.create({
+          email: email,
+          source: source,
+        });
 
-        const filteredSubcategories = findCat.subcategories.filter(
-          (subcategory) => subcategory.id != id
-        );
+        if (customer) {
+          console.log("customer", customer);
+          const newPayment = await stripe.charges.create({
+            amount: 499,
+            currency: "usd",
+            customer: customer.id,
+            receipt_email: email,
+          });
 
-        findCat.subcategories = filteredSubcategories;
-        await findCat.save();
-      }
+          console.log("new payment", newPayment);
 
-      // 5. process the image
-      if (photo) {
-        if (subcategory.photo) {
-          if (singleImageExist("subcategory", subcategory.photo)) {
-            singleImageDelete("subcategory", subcategory.photo);
+          if (order) {
+            order.isPaid = true;
+            order.paidAt = Date.now();
+
+            order.paymentResult = {
+              id: newPayment.id,
+              status: newPayment.status,
+              updateTime: newPayment.created,
+              emailAddress: newPayment.receipt_email,
+            };
+
+            const updatedOrder = await order.save();
+            return updatedOrder;
+          } else {
+            throw new Error("Order not found");
           }
         }
-        photo = await singleImageUpload("subcategory", photo);
-      } else {
-        photo = subcategory.photo;
+      } catch (error) {
+        console.log(error);
       }
 
-      // 6. update the subcategory
-      if (subcategory) {
-        subcategory.name = name;
-        subcategory.photo = photo;
-        subcategory.category = category;
-        const updatedSubcategory = await subcategory.save();
-
-        // 7. find the category and push subcategory into this category
-        if (category) {
-          console.log(category);
-          const updatedCategory = await Category.findOne({ _id: category });
-          updatedCategory.subcategories.push(updatedSubcategory);
-          await updatedCategory.save();
-        }
-
-        // 8. finally return it
-        return updatedSubcategory;
-      } else {
-        throw new Error("Subcategory not found");
-      }
+      // return stripe.customers
+      //   .create({
+      //     email,
+      //     source,
+      //   })
+      //   .then((customer) => {
+      //     stripe.charges.create(
+      //       {
+      //         amount: 203894,
+      //         currency: "usd",
+      //         customer: customer.id,
+      //         receipt_email: email,
+      //       },
+      //       { idempontencyKey }
+      //     );
+      //   })
+      //   .then((result) => {
+      //     return result;
+      //   })
+      //   .catch((err) => console.log(err));
     },
     // ============================  Delete  =============>
     async deleteOrder(_, { id }, context) {

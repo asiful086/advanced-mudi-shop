@@ -21,10 +21,31 @@ export const CREATE_ORDER = gql`
       }
     ) {
       id
+      user {
+        name
+      }
+      orderItems {
+        name
+        qty
+        photo
+        price
+        product {
+          name
+        }
+      }
+      shippingAddress {
+        phone
+        address
+      }
+      paymentResult {
+        updateTime
+      }
       paymentMethod
       taxPrice
       shippingPrice
       totalPrice
+      isPaid
+      isDelivered
     }
   }
 `;
@@ -43,23 +64,35 @@ export const DELETE_ORDER = gql`
   }
 `;
 // ============================= UPDATE  MUTATION =================>
-export const UPDATE_ORDER = gql`
-  mutation updateOrder(
-    $id: ID!
-    $name: String!
-    $photo: Upload
-    $category: ID
-  ) {
-    updateOrder(
-      input: { id: $id, name: $name, photo: $photo, category: $category }
-    ) {
+export const UPDATE_ORDER_TO_PAID = gql`
+  mutation updateOrderToPaid($id: ID, $email: String, $source: ID) {
+    updateOrderToPaid(input: { id: $id, email: $email, source: $source }) {
       id
-      name
-      photo
-      createdAt
-      category {
-        id
+      user {
+        name
       }
+      orderItems {
+        name
+        qty
+        photo
+        price
+        product {
+          name
+        }
+      }
+      shippingAddress {
+        phone
+        address
+      }
+      paymentResult {
+        updateTime
+      }
+      paymentMethod
+      taxPrice
+      shippingPrice
+      totalPrice
+      isPaid
+      isDelivered
     }
   }
 `;

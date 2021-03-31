@@ -31,7 +31,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.15",
     "mongoose-autopopulate": "^0.12.3",
-    "nodemailer": "^6.5.0"
+    "nodemailer": "^6.5.0",
+    "stripe": "^8.140.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "concurrently": "^6.0.0",

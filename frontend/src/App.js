@@ -30,6 +30,7 @@ import BuyerLayoutProtectedRoute from "./layouts/buyer/BuyerLayoutProtectedRoute
 import BuyerShippingPage from "./pages/buyer/BuyerShippingPage";
 import BuyerPaymentPage from "./pages/buyer/BuyerPaymentPage";
 import BuyerPlaceOrderPage from "./pages/buyer/BuyerPlaceOrderPage";
+import BuyerOrderPage from "./pages/buyer/BuyerOrderPage";
 
 function App() {
   return (
@@ -47,6 +48,10 @@ function App() {
         <BuyerLayoutProtectedRoute
           path="/placeorder"
           component={BuyerPlaceOrderPage}
+        />
+        <BuyerLayoutProtectedRoute
+          path="/buyer/order/:id"
+          component={BuyerOrderPage}
         />
 
         {/* front */}

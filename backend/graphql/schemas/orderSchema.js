@@ -78,10 +78,9 @@ type Order {
 
 
 
-  input OrderUpdateInput {
-    id: ID!
-    name: String!
-    photo: Upload
-    category: ID
+  input OrderUpdateToPaidInput {
+    id: ID
+    email: String
+    source: ID
   }
 `;

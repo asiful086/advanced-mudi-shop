@@ -12,7 +12,7 @@ import { GET_ORDERS } from "../../graphql/queries/orderQuery";
 import { CREATE_ORDER } from "../../graphql/mutations/orderMutation";
 import LoaderComponent from "../../utils/loader/LoaderComponent";
 
-const BuyerPlaceOrderPage = () => {
+const BuyerPlaceOrderPage = ({ history }) => {
   // 1  ============================= COMPONENT STATE =========================
 
   const [state, setState] = useState({
@@ -53,6 +53,7 @@ const BuyerPlaceOrderPage = () => {
           successMessage: "Order Added Successfully",
         });
       }
+      history.push(`/buyer/order/${returnedItem.id}`);
     },
     onError(err) {
       if (err.graphQLErrors[0].extensions.code === "BAD_USER_INPUT") {

@@ -90,7 +90,7 @@ module.exports = gql`
 
     # 7. order
     createOrder(input: OrderCreateInput): Order!
-    updateOrder(input: OrderUpdateInput): Order!
+    updateOrderToPaid(input: OrderUpdateToPaidInput): Order!
     deleteOrder(id: ID!): Order!
   }
 `;

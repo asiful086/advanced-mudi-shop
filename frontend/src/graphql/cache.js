@@ -35,6 +35,11 @@ export default new InMemoryCache({
             return incoming;
           },
         },
+        getOrders: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
         // getCategory: {
         //   read(_, { readField, variables }) {
         //     const allCategories = readField("getCategories");
@@ -80,6 +85,12 @@ export default new InMemoryCache({
         getProduct(_, { args, toReference }) {
           return toReference({
             __typename: "Product",
+            id: args.id,
+          });
+        },
+        getOrder(_, { args, toReference }) {
+          return toReference({
+            __typename: "Order",
             id: args.id,
           });
         },
