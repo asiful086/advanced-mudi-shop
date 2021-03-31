@@ -11,9 +11,16 @@ import cache from "./cache";
 // import jwtDecode from "jwt-decode";
 // import { Redirect } from "react-router";
 
-const uploadLink = createUploadLink({
+let uploadLink = createUploadLink({
   uri: "http://localhost:5000/graphql",
 });
+
+if (process.env.NODE_ENV === "production") {
+  console.log("production");
+  uploadLink = createUploadLink({
+    uri: "https://advanced-mudi-shop.herokuapp.com/graphql",
+  });
+}
 
 const authLink = setContext(() => {
   const token = localStorage.getItem("jwtToken");
