@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AdminTopNavComponent = () => {
   return (
@@ -37,6 +38,10 @@ const AdminTopNavComponent = () => {
               />
             </svg>
           </div>
+          <Link to="/" className="text-gray-500 capitalize">
+            {" "}
+            frontend
+          </Link>
           <div className="ml-auto flex items-center">
             <img
               className=" w-8 h-8 rounded-full "

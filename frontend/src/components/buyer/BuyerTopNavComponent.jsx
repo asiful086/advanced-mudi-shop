@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const BuyerTopNavComponent = () => {
   return (
@@ -37,6 +38,9 @@ const BuyerTopNavComponent = () => {
               />
             </svg>
           </div>
+          <Link to="/dashboard" className="text-gray-500 capitalize">
+            admin panel
+          </Link>
           <div className="ml-auto flex items-center">
             <img
               className=" w-8 h-8 rounded-full "

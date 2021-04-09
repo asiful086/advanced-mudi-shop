@@ -69,9 +69,67 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
-
-
 1. if parent
 
 2. if parent === previousParent
+
+ABOUT ME:
+
+    1. me: I am Mridul.
+
+    2. achievement: 5 ranked problem solver in codewar .  I am a self tought developher (thanks to youtube, stackoverflow, github, medium , dev, etc...).
+
+    3. education: Got Hsc certified this year.
+
+    4. experience: this is the first time i am applying. so if i make mistakes, plz be kind.
+
+    5. hobby: I like to learn new things always. And thats why, i am able to apply here today.
+
+NOTICE: 
+
+    1. I am working on this project. This project is not completed yet. So far, I worked maximum in admin area. So plz emphasize on admin panel first.
+
+    And below i have listed down what i have done so far ->
+
+
+The tech i have used:
+
+    i. backend
+
+        1. node js
+        2. express js
+        3. apollo graphql for api management
+        4. mongodb (mongodb altas cloud) for database
+
+
+    ii. frontend
+
+        1. react js
+        2. tailwind css for designing
+        3. apollo client for state management
+        4. reactive variable (come with apollo client)
+
+
+
+the features it provides :
+
+    i. backend
+
+        1. role based authectication using jwt token with graphql (reset password by sending 'reset password link' through  email, which will expire after 10 minutes);
+
+        2. data can be fetched through graphql whataver structure you want
+
+        3. sending mail
+
+        4. stripe for payment
+
+
+    ii. frontend
+
+        1. multiple layouts(backend , frontend)
+        2. role based  protected route
+        3. jwt refresh token 
+        4. store user's data ( jwt token ) with reactive variable
+        5. shopping cart using reactive variable
+        6. if data exists, do not request again to server using "apollo cache"  (its a big feature of apollo client )
+
