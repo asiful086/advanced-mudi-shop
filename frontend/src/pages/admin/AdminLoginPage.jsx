@@ -21,8 +21,14 @@ const AdminLoginPage = (props) => {
     update(_, { data: { login: userData } }) {
       localStorage.setItem("jwtToken", userData.token);
       // store the the user with reactive variable in localstorage
+
       storeUser(userData);
-      props.history.push("/dashboard");
+      console.log(userData);
+      if (userData.role === "admin") {
+        props.history.push("/dashboard");
+      } else {
+        props.history.push("/shipping");
+      }
     },
     onError(err) {
       setState({

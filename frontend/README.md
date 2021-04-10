@@ -75,26 +75,22 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ABOUT ME:
 
-    1. me: I am Mridul.
+    I am Asiful Haque Mridul. I am related to this field for  almost 1 year. I have been working on react and node for 7/8 month. When i get free time i like to solve problem in "codewar.com". And i am 5 ranked warior in "codewar.com". I noticed a post from your fb account that, you are providing a new job related react and node. I think i deserve that job according to your requirement. And if you also consider me as perfect,  then you can put me at the first place.
 
-    2. achievement: 5 ranked problem solver in codewar .  I am a self tought developher (thanks to youtube, stackoverflow, github, medium , dev, etc...).
+NOTICE:
 
-    3. education: Got Hsc certified this year.
+    1. I am working on this project (https://advanced-mudi-shop.herokuapp.com/). This project is not completed yet. So far, I worked maximum in admin area. So plz emphasize on admin panel first.
 
-    4. experience: this is the first time i am applying. so if i make mistakes, plz be kind.
+    2. Credientials : admin panel -> email: admin@gmail.com , pass: password
+                            user  -> email: oopsjonkar@gmail.com, pass: password
 
-    5. hobby: I like to learn new things always. And thats why, i am able to apply here today.
-
-NOTICE: 
-
-    1. I am working on this project. This project is not completed yet. So far, I worked maximum in admin area. So plz emphasize on admin panel first.
+    2. File upload in graphql is not working in node js 14. But working in 12 . So its not issue with my project.
 
     And below i have listed down what i have done so far ->
 
+THE TECH I HAVE USED:
 
-The tech i have used:
-
-    i. backend
+    i. backend ->
 
         1. node js
         2. express js
@@ -102,34 +98,28 @@ The tech i have used:
         4. mongodb (mongodb altas cloud) for database
 
 
-    ii. frontend
+    ii. frontend ->
 
         1. react js
         2. tailwind css for designing
         3. apollo client for state management
         4. reactive variable (come with apollo client)
 
+THE FEATURES IT PROVIDES:
 
-
-the features it provides :
-
-    i. backend
+    i. backend ->
 
         1. role based authectication using jwt token with graphql (reset password by sending 'reset password link' through  email, which will expire after 10 minutes);
-
         2. data can be fetched through graphql whataver structure you want
-
         3. sending mail
-
         4. stripe for payment
 
 
-    ii. frontend
+    ii. frontend ->
 
         1. multiple layouts(backend , frontend)
         2. role based  protected route
-        3. jwt refresh token 
+        3. jwt refresh token
         4. store user's data ( jwt token ) with reactive variable
         5. shopping cart using reactive variable
         6. if data exists, do not request again to server using "apollo cache"  (its a big feature of apollo client )
-

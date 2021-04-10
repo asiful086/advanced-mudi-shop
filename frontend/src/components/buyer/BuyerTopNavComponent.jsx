@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { removeUser, user } from "../../graphql/reactivities/userVariable";
 
 const BuyerTopNavComponent = () => {
+  const history = useHistory();
   return (
     <>
       <div className="h-16 bg-white border-b fixed w-full  flex items-center z-10">
@@ -38,9 +40,23 @@ const BuyerTopNavComponent = () => {
               />
             </svg>
           </div>
-          <Link to="/dashboard" className="text-gray-500 capitalize">
-            admin panel
-          </Link>
+          <div className="px-4">
+            <Link to="/dashboard" className="text-gray-500 capitalize">
+              admin panel
+            </Link>
+          </div>
+          <div>
+            {user() ? (
+              <div className="" onClick={() => removeUser(history, "/")}>
+                logout
+              </div>
+            ) : (
+              <Link to="/admin/login" className="text-gray-500 capitalize">
+                Login
+              </Link>
+            )}
+          </div>
+
           <div className="ml-auto flex items-center">
             <img
               className=" w-8 h-8 rounded-full "
