@@ -34,12 +34,14 @@ const BuyerSidebarNavComponent = () => {
 
   return (
     <>
-      <div className="fixed inset-y-0 left-0 w-64 border-r bg-indigoo-400 hidden md:block">
+      <div className="fixed inset-y-0 left-0 w-64 border-r bg-greenn-100 hidden md:block">
         <div className="h-full overflow-x-hidden overflow-y-auto">
           <ul>
-            <li className="h-16 border-b flex items-center justify-center">
+            <li className="h-16 border-b flex items-center justify-center bg-yellow-400">
               <h1 className="font-bold italic text-green-400s text-3xl">
-                <Link to="/">the beast</Link>
+                <Link to="/" className="text-greenn-400">
+                  the beast
+                </Link>
               </h1>
             </li>
           </ul>
